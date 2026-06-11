@@ -1,0 +1,75 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+*.egg
+
+# === Entornos virtuales ===
+.venv/
+venv/
+env/
+ENV/
+
+# === Variables de entorno / secretos ===
+.env
+.env.local
+.env.production
+*.key
+secrets.json
+
+# === Jupyter ===
+.ipynb_checkpoints/
+*.ipynb
+
+# === ChromaDB / Vector stores ===
+chroma_db/
+chroma_data/
+vectorstore/
+faiss_index/
+*.index
+
+# === Modelos locales ===
+*.gguf
+*.bin
+*.safetensors
+models/
+
+# === Datos y PDFs grandes ===
+data/raw/
+data/pdfs/
+*.pdf
+
+# === Streamlit ===
+.streamlit/secrets.toml
+
+# === Docker ===
+.docker/
+docker-volumes/
+
+# === Logs y outputs ===
+logs/
+*.log
+results/
+eval_outputs/
+
+# === Planificación interna (no va al repo público) ===
+contexto/
+
+# === Claude Code ===
+.claude/
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini

@@ -1,0 +1,26 @@
+# === Claude API ===
+anthropic
+
+# === LangChain ===
+langchain
+langchain-anthropic
+langchain-community
+langgraph
+
+# === RAG — Proyecto 1 ===
+chromadb
+sentence-transformers
+pymupdf                  # carga PDFs técnicos
+
+# === API + UI ===
+fastapi
+uvicorn[standard]
+streamlit
+
+# === Evaluación — Proyecto 2 ===
+ragas
+pandas
+matplotlib
+
+# === Utils ===
+python-dotenv
