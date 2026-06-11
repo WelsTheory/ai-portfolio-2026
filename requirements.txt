@@ -1,5 +1,6 @@
-# === Claude API ===
+# === LLM Clients ===
 anthropic
+openai                   # para modelos locales via LM Studio
 
 # === LangChain ===
 langchain

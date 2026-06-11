@@ -57,8 +57,13 @@ Stack: n8n · FastAPI · Buffer Window Memory · Webhook
 git clone <repo>
 cd IA_Roadmap
 
-py -3.12 -m venv .venv
-.venv\Scripts\activate          # Windows PowerShell
+python3.12 -m venv .venv
+
+# Windows (PowerShell)
+.venv\Scripts\activate
+
+# Linux / macOS
+source .venv/bin/activate
 ```
 
 ### 2. Instalar dependencias
@@ -72,7 +77,11 @@ pip install -r requirements.txt
 Copiar `.env.example` a `.env` y completar los valores:
 
 ```bash
+# Linux / macOS
 cp .env.example .env
+
+# Windows (PowerShell)
+copy .env.example .env
 ```
 
 ### 4. Verificar
