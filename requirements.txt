@@ -5,6 +5,7 @@ openai                   # para modelos locales via LM Studio
 # === LangChain ===
 langchain
 langchain-anthropic
+langchain-mistralai
 langchain-community
 langgraph
 

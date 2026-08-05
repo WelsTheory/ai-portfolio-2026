@@ -41,10 +41,10 @@ def imprimir_analisis(analisis: AnalisisPeriferico) -> None:
     print("=" * 60)
     print(f"Descripción : {analisis.descripcion}")
     print(f"HAL ejemplo : {analisis.funcion_hal_ejemplo}")
-    print("\nUsar DMA cuando:")
+    print(f"\nUsar DMA con {analisis.nombre} cuando:")
     for caso in analisis.casos_dma:
         print(f"  • {caso}")
-    print("\nUsar interrupciones cuando:")
+    print(f"\nUsar interrupciones con {analisis.nombre} cuando:")
     for caso in analisis.casos_interrupcion:
         print(f"  • {caso}")
 
