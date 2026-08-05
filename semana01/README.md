@@ -77,6 +77,14 @@ response.choices[0].message.content
 
 LM Studio expone una API compatible con OpenAI en `http://localhost:1234/v1`. Útil cuando necesitas privacidad total o no tienes conexión.
 
+### Modelos usados en este proyecto
+
+| Modelo | Cuantización | PC | VRAM aprox |
+|--------|-------------|-----|-----------|
+| Qwen3 9B | Q4_K_M | PC nueva (RTX 5060 8GB) | ~6GB |
+| Llama 3.3 8B Instruct | Q5_K_M | PC nueva (RTX 5060 8GB) | ~6GB |
+| TinyLlama 1.1B | — | PC antigua (GTX 1050 Ti 4GB) | ~1GB |
+
 ```
 LM Studio corriendo con modelo cargado
     ↓

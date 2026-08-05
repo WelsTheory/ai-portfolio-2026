@@ -37,7 +37,10 @@ Stack: n8n · FastAPI · Buffer Window Memory · Webhook
 
 | Componente     | Tecnología                              |
 |----------------|-----------------------------------------|
-| LLM            | Claude API (Haiku · Sonnet)             |
+| LLM (pago)     | Claude API (Haiku · Sonnet)             |
+| LLM (gratis)   | Mistral API (mistral-small-latest)      |
+| LLM (local)    | Qwen3 9B Q4_K_M · Llama 3.3 8B Q5_K_M  |
+| Servidor local | LM Studio                               |
 | Embeddings     | sentence-transformers (local)           |
 | Vector DB      | ChromaDB (persistente, local)           |
 | Framework      | LangChain + LangGraph                   |
@@ -46,6 +49,30 @@ Stack: n8n · FastAPI · Buffer Window Memory · Webhook
 | Agentes        | n8n + LangGraph                         |
 | Evaluación     | RAGAS                                   |
 | Contenedores   | Docker + Docker Compose                 |
+
+---
+
+## Hardware de desarrollo
+
+### PC Nueva (desarrollo principal)
+
+| Componente | Especificación |
+|------------|----------------|
+| CPU | AMD Ryzen 5 7500F 6-Core (3.70 GHz) |
+| GPU | NVIDIA RTX 5060 — 8GB VRAM |
+| RAM | 32GB |
+| Storage | 2.22 TB (580 GB libres) |
+| Modelos locales | Qwen3 9B Q4_K_M · Llama 3.3 8B Instruct Q5_K_M |
+
+### PC Antigua (servidor/backup)
+
+| Componente | Especificación |
+|------------|----------------|
+| CPU | AMD Ryzen 5 2600 (6 cores, 12 threads) |
+| GPU | NVIDIA GTX 1050 Ti — 4GB VRAM |
+| RAM | 15GB |
+| Storage | 720 GB libres |
+| Modelos locales | TinyLlama 1.1B |
 
 ---
 
