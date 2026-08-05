@@ -2,13 +2,32 @@
 
 ## Qué se probó
 
-Se ejecutaron los tres scripts de semana 1 con la misma pregunta técnica sobre el DMA controller del STM32F407:
+### Etapa 1 — Primera llamada a la API
+
+| Script | Proveedor | Costo | Resultado |
+|--------|-----------|-------|-----------|
+| `hello_claude.py` | Claude Haiku (Anthropic API) | Pago | OK |
+| `hello_mistral.py` | Mistral Small (Mistral API) | Gratis | OK |
+| `hello_local.py` | Modelo local via LM Studio | Gratis | OK |
+| `multi_provider.py` | Los tres lado a lado | — | OK |
+
+### Etapa 2 — Análisis de tokens y costo
 
 | Script | Proveedor | Resultado |
 |--------|-----------|-----------|
-| `hello_claude.py` | Claude Haiku (API remota) | OK |
-| `hello_local.py` | Modelo local via LM Studio | OK |
-| `multi_provider.py` | Ambos lado a lado | OK |
+| `tokens_analisis.py` | Mistral + Claude | Pendiente |
+
+### Etapa 3 — Experimentos con el prompt
+
+| Script | Proveedor | Resultado |
+|--------|-----------|-----------|
+| `prompt_experiments.py` | Claude | Pendiente |
+
+### Etapa 4 — Múltiples preguntas en loop
+
+| Script | Proveedor | Resultado |
+|--------|-----------|-----------|
+| `batch_topics.py` | Mistral | Pendiente |
 
 ---
 
@@ -16,20 +35,23 @@ Se ejecutaron los tres scripts de semana 1 con la misma pregunta técnica sobre 
 
 ### Calidad y estructura
 
-| Aspecto | Claude Haiku | Modelo local |
-|---------|-------------|--------------|
-| Estructura | Tablas, secciones, diagrama ASCII | Prosa con bullets |
-| Código HAL | Sí — ejemplo completo con callback | No |
-| Precisión técnica | Alta | Media |
-| Contenido extra | Solo respondió lo pedido | Agregó preguntas sin que se le pidieran |
+| Aspecto | Claude Haiku | Mistral Small | Modelo local |
+|---------|-------------|---------------|--------------|
+| Estructura | Tablas, secciones, diagrama ASCII | Secciones detalladas con tabla | Prosa con bullets |
+| Código HAL | Sí — ejemplo completo con callback | No | No |
+| Precisión técnica | Alta | Alta | Media |
+| Detalle técnico | General | Registros CR/NDTR/PAR/MAR, modos circular y double buffer | General |
+| Contenido extra | Solo respondió lo pedido | Solo respondió lo pedido | Agregó preguntas sin que se le pidieran |
 
-### Error técnico detectado en el modelo local
+### Errores técnicos detectados
 
-El modelo local afirmó que el STM32F407 tiene **7 canales DMA**. Esto es incorrecto:
+**Modelo local:** afirmó que el STM32F407 tiene **7 canales DMA** — incorrecto.
 
-> El STM32F407 tiene **2 controladores DMA** (DMA1 y DMA2) con **8 streams cada uno**, para un total de 16 streams independientes.
+**Mistral Small:** describió la arquitectura como "16 canales (0-15), cada uno con hasta 8 streams" — la estructura real es la inversa: **2 controladores DMA, cada uno con 8 streams, y cada stream con 8 canales posibles**.
 
-Esto confirma una limitación real de los modelos más pequeños en dominios técnicos específicos: generan texto plausible pero no necesariamente exacto. **Siempre verificar contra el datasheet oficial.**
+> Referencia correcta: el STM32F407 tiene **2 controladores DMA** (DMA1 y DMA2) con **8 streams cada uno**, para un total de 16 streams independientes.
+
+Mistral fue el más detallado de los tres, pero aun así invirtió la jerarquía canales/streams. **Siempre verificar contra el datasheet oficial.**
 
 ---
 
@@ -45,11 +67,23 @@ Ambos modelos cortaron la respuesta antes de terminar con `max_tokens=512`. En e
 
 | Caso de uso | Recomendación |
 |-------------|---------------|
-| Documentación técnica precisa | Claude API |
-| Explicaciones con código HAL | Claude API |
-| Tareas simples o privadas (sin enviar datos sensibles a la nube) | Modelo local |
-| Prototipado rápido sin costo por token | Modelo local |
+| Documentación técnica precisa con código HAL | Claude API |
+| Exploración técnica detallada sin costo | Mistral API |
+| Tareas privadas (datos que no deben salir de la máquina) | Modelo local |
+| Prototipado rápido sin costo ni internet | Modelo local |
 | Comparación de calidad entre modelos | `multi_provider.py` |
+
+---
+
+## Lo que aprendemos en cada etapa
+
+| Etapa | Script | Concepto clave |
+|-------|--------|----------------|
+| 1 | `hello_*.py` | Cómo conectarse a distintas APIs con el mismo cliente |
+| 1 | `multi_provider.py` | Diferencias de calidad entre modelos pago y gratis |
+| 2 | `tokens_analisis.py` | Cómo medir consumo y estimar costo de cada llamada |
+| 3 | `prompt_experiments.py` | Cómo el system prompt y la temperatura cambian la respuesta |
+| 4 | `batch_topics.py` | Cómo automatizar múltiples preguntas y exportar resultados |
 
 ---
 

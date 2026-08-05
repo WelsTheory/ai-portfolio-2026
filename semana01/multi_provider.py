@@ -32,6 +32,18 @@ def ask_local(question: str) -> str:
     )
     return response.choices[0].message.content
 
+def ask_mistral(question: str) -> str:
+    client = OpenAI(
+        base_url="https://api.mistral.ai/v1",
+        api_key=os.getenv("MISTRAL_API_KEY"),
+    )
+    response = client.chat.completions.create(
+        model="mistral-small-latest",
+        max_tokens=512,
+        messages=[{"role": "user", "content": question}],
+    )
+    return response.choices[0].message.content
+
 def print_response(provider: str, text: str) -> None:
     separator = "=" * 60
     print(f"\n{separator}")
@@ -42,5 +54,6 @@ def print_response(provider: str, text: str) -> None:
 if __name__ == "__main__":
     print(f"Pregunta: {QUESTION}\n")
 
-    print_response("CLAUDE (Haiku)", ask_claude(QUESTION))
-    print_response("LOCAL (LM Studio)", ask_local(QUESTION))
+    print_response("CLAUDE Haiku      |  pago   |  Anthropic API", ask_claude(QUESTION))
+    print_response("Mistral Small     |  gratis |  Mistral API",   ask_mistral(QUESTION))
+    print_response("Modelo local      |  gratis |  LM Studio",     ask_local(QUESTION))
